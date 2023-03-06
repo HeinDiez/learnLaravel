@@ -39,9 +39,9 @@ use App\Http\Controllers\PostsController;
 
 // Route::get('contacts', [PostsController:: class, 'contact']);
 
-// Route::get('/insert',  function () {
-//     DB::insert('insert into posts(title, body) values(?,?)', ['Javascript', 'Learning Javascript is nice sa eyes.']);
-// });
+Route::get('/insert',  function () {
+    DB::insert('insert into posts(title, body) values(?,?)', ['Testing', 'testing is nice sa eyes.']);
+});
 
 // Route::get('/read',  function () {
 //     $result=DB::select('select * from posts');
@@ -63,10 +63,25 @@ use App\Http\Controllers\PostsController;
 
 
 Route::get('/all', function() {
-    $posts = Post::all();
+    $posts = Post::where('id', 2)->orderBy('id', 'desc')->get();
     return $posts;
     
     // foreach($posts as $post) {
     //     return $post->title;
     // }
+});
+
+Route::get('/findmore', function() {
+    $posts = Post::where('id', '<', '50')->firstOrFail();
+    return $posts;
+});
+
+Route::get('/basicinsert', function() {
+    $post = Post::find(5);
+
+    $post->title = "Using Eloquent";
+    $post->body = "Eloquest is to cool. Lets learn this.";
+
+    $post->save();
+
 });
