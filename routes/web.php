@@ -76,12 +76,79 @@ Route::get('/findmore', function() {
     return $posts;
 });
 
-Route::get('/basicinsert', function() {
+Route::get('/create/{title}/{body}', function($title , $body) {
+    // Post::create(['title'=>'title on create method', 'body'=>'Wow it works creating a post on the create method.']);
+
+    // ----or----
+
+    $post = new Post;
+
+    $post->title = $title;
+    $post->body = $body;
+
+    $post->save();
+});
+
+
+Route::get('/save', function() {
+    Post::where('id', 4)->where('title', 'Testing')->update(['title'=>'new Testing', 'body'=>'I love PHP sample body']);
+
+
+    // -----or-----
     $post = Post::find(5);
 
     $post->title = "Using Eloquent";
     $post->body = "Eloquest is to cool. Lets learn this.";
 
     $post->save();
+});
 
+Route::get('/deletedata', function() {
+    $post = Post::find(1);
+
+    $post->delete();
+
+    // ----or----
+
+    // Post::destroy([4,5]);
+
+    // -----or----
+
+    // Post::where('id', 4)->delete();
+
+
+});
+
+Route::get('/softdelete', function() {
+
+    Post::where('id', 6)->delete();
+});
+
+Route::get('/retrieve', function() {
+
+    // ** ----- getting will not show trashed items.
+    // $post = Post::find(6);
+    // return $post;
+
+    // ** ----- Get Trashed items and not trashed items
+    // $post = Post::withTrashed()->where('id', 6)->get();
+    // return $post;
+
+
+    // ** ----- Get Trashed items only
+    $post = Post::onlyTrashed()->get();
+    return $post;
+});
+
+
+Route::get('/restore', function() {
+
+    Post::withTrashed()->where('id', '<', 50)->restore();
+
+});
+
+
+Route::get('/forcedelete', function() {
+    
+    Post::where('id', 6)->forceDelete();
 });
