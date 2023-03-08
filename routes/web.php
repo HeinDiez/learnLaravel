@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Models\Post;
+use App\Models\User;
 
 use App\Http\Controllers\PostsController;
 
@@ -152,3 +153,18 @@ Route::get('/forcedelete', function() {
     
     Post::where('id', 6)->forceDelete();
 });
+
+
+/*
+|--------------------------------------------------------------------------
+| ELOQUENT Relationship
+|--------------------------------------------------------------------------
+|
+*/
+Route::get('/user/post/{id}', function($id) {
+    
+    return User::find($id)->comments;
+
+});
+
+
