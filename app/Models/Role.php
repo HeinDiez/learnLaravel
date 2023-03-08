@@ -18,6 +18,6 @@ class Role extends Model
      */
     public function roles(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'role_user');
+        return $this->belongsToMany(User::class, 'role_user')->withPivot("created_at");
     }
 }
