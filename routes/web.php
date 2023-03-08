@@ -168,3 +168,14 @@ Route::get('/user/post/{id}', function($id) {
 });
 
 
+Route::get('/post/user/{id}', function($id) {
+    
+    return Post::find($id)->user;
+
+});
+
+Route::get('/user/role/{id}', function($id) {
+    
+    return User::find($id)->roles;
+
+});
