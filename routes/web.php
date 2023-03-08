@@ -3,10 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Support\Facades\Route;
-
-use App\Models\Post;
-use App\Models\User;
-
 use App\Http\Controllers\PostsController;
 
 /*
@@ -190,7 +186,7 @@ Route::get('/getUserRole/{id}', function($id) {
 
 Route::get('/user/country/{id}', function($id) {
     
-    
+    return Country::find($id)->posts;
 
 });
 
