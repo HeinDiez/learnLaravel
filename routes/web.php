@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Models;
+
 use Illuminate\Support\Facades\Route;
 
 use App\Models\Post;
@@ -176,6 +178,14 @@ Route::get('/post/user/{id}', function($id) {
 
 Route::get('/user/role/{id}', function($id) {
     
-    return User::find($id)->roles;
+    return User::find($id)->roles()->orderBy('id', 'desc')->get();
 
 });
+
+Route::get('/getUserRole/{id}', function($id) {
+    
+    return Role::find($id)->roles()->orderBy('id', 'desc')->get();
+
+});
+
+
