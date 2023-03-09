@@ -214,6 +214,8 @@ Route::get('/post/photo/{id}', function ($id) {
  
 });
 
+
+//reverse query
 Route::get('/photo/{id}/user', function ($id) {
     return Photo::findOrFail($id)->imageable;
 });
@@ -225,6 +227,7 @@ Route::get('/post/poly/{id}', function ($id) {
     return Post::findOrFail($id)->tags;
 });
 
+//reverse query
 Route::get('/poly/tag/{id}', function ($id) {
     return Tag::findOrFail($id)->video;
 });
