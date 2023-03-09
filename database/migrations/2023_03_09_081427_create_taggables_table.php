@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('taggables', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->integer('tag_id'); // ID for the Tag table
+            $table->integer('taggable_id'); // ID for the Model you want to morph
+            $table->string('taggable_type'); // target model App\Models\Post, App\Models\Video
         });
     }
 

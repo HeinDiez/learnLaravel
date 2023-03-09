@@ -200,7 +200,7 @@ Route::get('/user/country/{id}', function($id) {
 |--------------------------------------------------------------------------
 | ELOQUENT Polymorphic Relationship
 |--------------------------------------------------------------------------
-|
+|   Useful for History, Logs and Versions
 */
 
 //  One is to One Polymorphic Relation
@@ -220,3 +220,11 @@ Route::get('/photo/{id}/user', function ($id) {
 
 
 // Many to Many Polymorphic Relation
+
+Route::get('/post/poly/{id}', function ($id) {
+    return Post::findOrFail($id)->tags;
+});
+
+Route::get('/poly/tag/{id}', function ($id) {
+    return Tag::findOrFail($id)->video;
+});
