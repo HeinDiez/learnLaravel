@@ -60,6 +60,12 @@ Route::get('/insert',  function () {
 
 // });
 
+/*
+|--------------------------------------------------------------------------
+| ELOQUENT Queries
+|--------------------------------------------------------------------------
+|
+*/
 
 Route::get('/all', function() {
     $posts = Post::where('id', 2)->orderBy('id', 'desc')->get();
@@ -190,3 +196,27 @@ Route::get('/user/country/{id}', function($id) {
 
 });
 
+/*
+|--------------------------------------------------------------------------
+| ELOQUENT Polymorphic Relationship
+|--------------------------------------------------------------------------
+|
+*/
+
+//  One is to One Polymorphic Relation
+Route::get('/user/photo/{id}', function ($id) {
+   return User::find($id)->photos;
+
+});
+
+Route::get('/post/photo/{id}', function ($id) {
+    return Post::find($id)->photos;
+ 
+});
+
+Route::get('/photo/{id}/user', function ($id) {
+    return Photo::findOrFail($id)->imageable;
+});
+
+
+// Many to Many Polymorphic Relation
